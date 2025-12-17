@@ -35,7 +35,7 @@ public class TaskController {
     @PutMapping("/{id}")
     public Task updateTask(@PathVariable Long id, @RequestBody Task updatedTask) {
         Task task = service.findById(id);
-        task.setCompleted(updatedTask.isCompleted());
+        task.setStatus(updatedTask.getStatus());
         return service.save(task);
     }
 }

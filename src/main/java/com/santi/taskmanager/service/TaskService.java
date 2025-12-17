@@ -1,6 +1,7 @@
 package com.santi.taskmanager.service;
 
 import com.santi.taskmanager.model.Task;
+import com.santi.taskmanager.model.TaskStatus;
 import com.santi.taskmanager.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +21,12 @@ public class TaskService {
     }
 
     public Task save(Task task) {
+        if (task.getStatus() == null) {
+            task.setStatus(TaskStatus.PENDING);
+        }
         return repository.save(task);
     }
+
 
     public void deleteById(Long id) {
         repository.deleteById(id);

@@ -11,14 +11,16 @@ public class Task {
 
     private String title;
 
-    private boolean completed;
-
     public Task() {
+        this.status = TaskStatus.PENDING;
     }
+
+    @Enumerated(EnumType.STRING)
+    private TaskStatus status;
 
     public Task(String title) {
         this.title = title;
-        this.completed = false;
+        this.status = TaskStatus.PENDING;
     }
 
     public Long getId() {
@@ -29,10 +31,6 @@ public class Task {
         return title;
     }
 
-    public boolean isCompleted() {
-        return completed;
-    }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -41,7 +39,11 @@ public class Task {
         this.title = title;
     }
 
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
+    public TaskStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(TaskStatus status) {
+        this.status = status;
     }
 }
