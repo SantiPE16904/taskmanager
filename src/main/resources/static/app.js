@@ -4,9 +4,7 @@ const taskList = document.getElementById("task-list");
 const form = document.getElementById("task-form");
 const titleInput = document.getElementById("title");
 
-/**
- * Carga todas las tareas y las pinta en la web
- */
+//Maquetador de tareas en front
 function loadTasks() {
     fetch(API_URL)
         .then(res => res.json())
@@ -58,9 +56,7 @@ function loadTasks() {
         });
 }
 
-/**
- * Crea una nueva tarea
- */
+// Crea tareas
 form.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -81,9 +77,7 @@ form.addEventListener("submit", function (e) {
     });
 });
 
-/**
- * Actualiza el estado de una tarea
- */
+//Actualiza el estado de tareas
 function updateTask(id, status) {
     fetch(`${API_URL}/${id}`, {
         method: "PUT",
@@ -98,9 +92,7 @@ function updateTask(id, status) {
     });
 }
 
-/**
- * Elimina una tarea
- */
+// Elimina tareas
 function deleteTask(id) {
     fetch(`${API_URL}/${id}`, {
         method: "DELETE"
