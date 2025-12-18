@@ -11,6 +11,9 @@ public class User {
     private Long id;
 
     @Column(nullable = false, unique = true)
+    private String username;
+
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
@@ -18,13 +21,18 @@ public class User {
 
     public User() {}
 
-    public User(String email, String password) {
+    public User(String username, String email, String password) {
+        this.username = username;
         this.email = email;
         this.password = password;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public String getEmail() {

@@ -1,9 +1,10 @@
 package com.santi.taskmanager.controller;
 
-import com.santi.taskmanager.model.User;
+import com.santi.taskmanager.dto.LoginRequest;
+import com.santi.taskmanager.dto.RegisterRequest;
+import com.santi.taskmanager.dto.UserDTO;
 import com.santi.taskmanager.service.UserService;
 import org.springframework.web.bind.annotation.*;
-import com.santi.taskmanager.dto.UserDTO;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -17,12 +18,19 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public UserDTO login(@RequestBody User user) {
-        return service.login(user.getEmail(), user.getPassword());
+    public UserDTO login(@RequestBody LoginRequest request) {
+        return service.login(
+                request.getEmail(),
+                request.getPassword()
+        );
     }
 
     @PostMapping("/register")
-    public UserDTO register(@RequestBody User user) {
-        return service.register(user.getEmail(), user.getPassword());
+    public UserDTO register(@RequestBody RegisterRequest request) {
+        return service.register(
+                request.getUsername(),
+                request.getEmail(),
+                request.getPassword()
+        );
     }
 }

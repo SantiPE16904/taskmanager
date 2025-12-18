@@ -2,8 +2,8 @@ package com.santi.taskmanager.service;
 
 import com.santi.taskmanager.model.User;
 import com.santi.taskmanager.repository.UserRepository;
-import org.springframework.stereotype.Service;
 import com.santi.taskmanager.dto.UserDTO;
+import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
@@ -15,6 +15,7 @@ public class UserService {
     }
 
     public UserDTO login(String email, String password) {
+
         User user = repository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -22,16 +23,26 @@ public class UserService {
             throw new RuntimeException("Invalid password");
         }
 
-        return new UserDTO(user.getId(), user.getEmail());
+        return new UserDTO(
+                user.getId(),
+                user.getEmail(),
+                user.getUsername()
+        );
     }
 
-    public UserDTO register(String email, String password) {
+    public UserDTO register(String username, String email, String password) {
 
         if (repository.findByEmail(email).isPresent()) {
             throw new RuntimeException("User already exists");
         }
 
-        User user = repository.save(new User(email, password));
-        return new UserDTO(user.getId(), user.getEmail());
+        User user = new User(username, email, password);
+        repository.save(user);
+
+        return new UserDTO(
+                user.getId(),
+                user.getEmail(),
+                user.getUsername()
+        );
     }
 }

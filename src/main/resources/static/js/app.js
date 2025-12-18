@@ -80,7 +80,7 @@ function register() {
         })
         .then(() => {
             alert("Usuario registrado correctamente");
-            window.location.href = "/html/login.html";
+            window.location.href = "/html/tasks.html";
         })
         .catch(() => {
             alert("Ese email o username ya está registrado");
