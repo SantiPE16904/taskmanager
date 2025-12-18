@@ -2,9 +2,14 @@ package com.santi.taskmanager.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import com.santi.taskmanager.model.User;
 
 @Entity
 public class Task {
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,6 +53,14 @@ public class Task {
 
     public void setStatus(TaskStatus status) {
         this.status = status;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @PrePersist
