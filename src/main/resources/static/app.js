@@ -3,6 +3,7 @@ const API_URL = "http://localhost:8080/api/tasks";
 const taskList = document.getElementById("task-list");
 const form = document.getElementById("task-form");
 const titleInput = document.getElementById("title");
+let currentFilter = "ALL";
 
 //Maquetador de tareas en front
 function loadTasks() {
@@ -11,7 +12,13 @@ function loadTasks() {
         .then(tasks => {
             taskList.innerHTML = "";
 
-            tasks.forEach(task => {
+            let filteredTasks = tasks;
+
+            if (currentFilter !== "ALL") {
+                filteredTasks = tasks.filter(task => task.status === currentFilter);
+            }
+
+            filteredTasks.forEach(task => {
                 const li = document.createElement("li");
 
                 // Clase CSS según estado
@@ -55,6 +62,18 @@ function loadTasks() {
             });
         });
 }
+
+document.querySelectorAll(".filters button").forEach(button => {
+    button.addEventListener("click", () => {
+        currentFilter = button.dataset.status;
+
+        document.querySelectorAll(".filters button")
+            .forEach(b => b.classList.remove("active"));
+        button.classList.add("active");
+
+        loadTasks();
+    });
+});
 
 // Crea tareas
 form.addEventListener("submit", function (e) {

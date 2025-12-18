@@ -82,3 +82,17 @@ li button {
 li button:hover {
     background-color: #a71d2a;
 }
+
+.filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.filters button {
+    background-color: #6c757d;
+}
+
+.filters button.active {
+    background-color: #007bff;
+}
