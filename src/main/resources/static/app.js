@@ -19,10 +19,15 @@ function loadTasks() {
             }
 
             filteredTasks.forEach(task => {
+                const date = document.createElement("small");
+                date.textContent = new Date(task.createdAt).toLocaleString();
+                date.style.marginLeft = "10px";
+                date.style.color = "#6c757d";
                 const li = document.createElement("li");
 
                 // Clase CSS según estado
                 li.classList.add(task.status.toLowerCase());
+                li.appendChild(date);
 
                 // Select de estado
                 const select = document.createElement("select");

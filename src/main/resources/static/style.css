@@ -96,3 +96,7 @@ li button:hover {
 .filters button.active {
     background-color: #007bff;
 }
+
+li small {
+    font-size: 12px;
+}

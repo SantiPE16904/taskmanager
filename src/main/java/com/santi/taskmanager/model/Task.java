@@ -1,6 +1,7 @@
 package com.santi.taskmanager.model;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 public class Task {
@@ -10,6 +11,8 @@ public class Task {
     private Long id;
 
     private String title;
+
+    private LocalDateTime createdAt;
 
     public Task() {
         this.status = TaskStatus.PENDING;
@@ -45,5 +48,14 @@ public class Task {
 
     public void setStatus(TaskStatus status) {
         this.status = status;
+    }
+
+    @PrePersist
+    public void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 }

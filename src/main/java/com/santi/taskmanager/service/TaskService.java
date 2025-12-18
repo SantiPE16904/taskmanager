@@ -17,7 +17,7 @@ public class TaskService {
     }
 
     public List<Task> findAll() {
-        return repository.findAll();
+        return repository.findAllByOrderByCreatedAtDesc();
     }
 
     public Task save(Task task) {
