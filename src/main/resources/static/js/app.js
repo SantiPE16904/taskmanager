@@ -7,9 +7,18 @@ const API_URL = "http://localhost:8080/api/tasks";
 const storedUser = localStorage.getItem("user");
 const currentUser = storedUser ? JSON.parse(storedUser) : null;
 
+if (window.location.pathname.includes("/html/tasks.html") && currentUser) {
+    document.addEventListener("DOMContentLoaded", () => {
+        const welcome = document.getElementById("welcome-user");
+        if (welcome) {
+            welcome.textContent = `Bienvenido, ${currentUser.username}`;
+        }
+    });
+}
+
 // Protección: no entrar a tasks sin login
 if (window.location.pathname.includes("/html/tasks.html") && !currentUser) {
-    window.location.href = "/html/login.html";
+    window.location.href = "/html/index.html";
 }
 
 /* =========================
@@ -48,11 +57,13 @@ function login() {
 ========================= */
 
 function register() {
+    const usernameInput = document.getElementById("register-username");
     const emailInput = document.getElementById("register-email");
     const passwordInput = document.getElementById("register-password");
 
-    if (!emailInput || !passwordInput) return;
+    if (!usernameInput || !emailInput || !passwordInput) return;
 
+    const username = usernameInput.value;
     const email = emailInput.value;
     const password = passwordInput.value;
 
@@ -61,7 +72,7 @@ function register() {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ username, email, password })
     })
         .then(res => {
             if (!res.ok) throw new Error("Registro incorrecto");
@@ -71,8 +82,8 @@ function register() {
             alert("Usuario registrado correctamente");
             window.location.href = "/html/login.html";
         })
-        .catch(err => {
-            alert("Ese email ya está registrado");
+        .catch(() => {
+            alert("Ese email o username ya está registrado");
         });
 }
 
@@ -159,7 +170,7 @@ function deleteTask(id) {
 
 function logout() {
     localStorage.removeItem("user");
-    window.location.href = "/html/login.html";
+    window.location.href = "/html/index.html";
 }
 
 /* =========================
