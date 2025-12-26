@@ -100,4 +100,4 @@ Despliegue en la nube
 
 ## Autor
 
-Santi Desarrollador Full Stack Junior
+Santiago Pérez Esteban, Desarrollador Full Stack Junior
