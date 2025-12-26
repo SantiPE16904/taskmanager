@@ -76,7 +76,7 @@ Abrir el proyecto en IntelliJ IDEA
 
 Ejecutar la clase: `TaskmanagerApplication.java`
 
-URL para acceder a la aplicación: `http://localhost:8080/index.html`
+URL para acceder a la aplicación: `http://localhost:8080/html/index.html`
 
 ## Base de datos
 

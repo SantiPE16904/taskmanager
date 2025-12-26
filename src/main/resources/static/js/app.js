@@ -232,6 +232,18 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
+        document.querySelectorAll(".sidebar button").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const view = btn.dataset.view;
+
+                document.querySelectorAll(".view").forEach(v =>
+                    v.classList.remove("active")
+                );
+
+                document.getElementById(`view-${view}`).classList.add("active");
+            });
+        });
+
         loadTasks();
     }
 });
